@@ -12,6 +12,8 @@ Pipeline:
 """
 
 import os
+import json
+import joblib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -66,12 +68,14 @@ def preprocess(df, drop_proxies=False):
         cat_cols = [c for c in cat_cols if c not in ["sex", "relationship", "marital-status"]]
 
     X = data.drop(columns=drop_cols)
+    encoders = {}
     for c in cat_cols:
         le = LabelEncoder()
         X[c] = le.fit_transform(X[c])
+        encoders[c] = le
 
     y = data["income_binary"]
-    return X, y, sex_col, race_col
+    return X, y, sex_col, race_col, encoders
 
 # ---------------------------------------------------------------------------
 # 2. PRE-MITIGATION BIAS AUDIT
@@ -203,12 +207,12 @@ if __name__ == "__main__":
     bias_audit(df)
 
     # ---- BASELINE (all features, no mitigation) ----
-    X, y, sex, race = preprocess(df, drop_proxies=False)
+    X, y, sex, race, encoders = preprocess(df, drop_proxies=False)
     model, scaler, X_test, X_test_s, y_test, y_pred, s_test, baseline_results = \
         train_and_evaluate(X, y, sex, label="Baseline (Logistic Regression, no mitigation)", model_type="logreg")
 
     # ---- MITIGATION 1: Feature elimination ----
-    X_fe, y_fe, sex_fe, race_fe = preprocess(df, drop_proxies=True)
+    X_fe, y_fe, sex_fe, race_fe, encoders_fe = preprocess(df, drop_proxies=True)
     model_fe, scaler_fe, X_test_fe, X_test_fe_s, y_test_fe, y_pred_fe, s_test_fe, fe_results = \
         train_and_evaluate(X_fe, y_fe, sex_fe, label="Mitigation A: Feature Elimination (drop sex/relationship/marital-status)", model_type="logreg")
 
@@ -249,6 +253,60 @@ if __name__ == "__main__":
     print(summary.round(4).to_string(index=False))
     os.makedirs("output", exist_ok=True)
     summary.to_csv("output/summary_results.csv", index=False)
+
+    # ---- BACKEND ARTIFACTS (model, scaler, encoders, metrics, feature schema) ----
+    artifacts_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "backend", "artifacts")
+    os.makedirs(artifacts_dir, exist_ok=True)
+
+    joblib.dump(model, os.path.join(artifacts_dir, "baseline_model.joblib"))
+    joblib.dump(scaler, os.path.join(artifacts_dir, "baseline_scaler.joblib"))
+    joblib.dump(encoders, os.path.join(artifacts_dir, "baseline_encoders.joblib"))
+
+    joblib.dump(model_fe, os.path.join(artifacts_dir, "fe_model.joblib"))
+    joblib.dump(scaler_fe, os.path.join(artifacts_dir, "fe_scaler.joblib"))
+    joblib.dump(encoders_fe, os.path.join(artifacts_dir, "fe_encoders.joblib"))
+
+    def _by_group_to_dict(by_group_df):
+        return {str(k): {m: round(float(v), 6) for m, v in row.items()} for k, row in by_group_df.iterrows()}
+
+    def _result_to_dict(r):
+        return {
+            "label": r["label"],
+            "overall": {k: round(float(v), 6) for k, v in r["overall"].items()},
+            "by_group": _by_group_to_dict(r["by_group"]),
+            "dp_diff": round(float(r["dp_diff"]), 6),
+            "dp_ratio": round(float(r["dp_ratio"]), 6),
+            "eo_diff": round(float(r["eo_diff"]), 6),
+        }
+
+    metrics = {
+        "baseline": _result_to_dict(baseline_results),
+        "feature_elimination": _result_to_dict(fe_results),
+        "reweighting": _result_to_dict(rw_results),
+        "threshold_optimization": _result_to_dict(to_results),
+    }
+    with open(os.path.join(artifacts_dir, "metrics.json"), "w") as f:
+        json.dump(metrics, f, indent=2)
+
+    numeric_cols = ["age", "education-num", "capital-gain", "capital-loss", "hours-per-week"]
+    feature_schema = {
+        "baseline": {
+            "columns": list(X.columns),
+            "categorical": {c: [str(v) for v in le.classes_] for c, le in encoders.items()},
+            "numeric": {
+                c: {"min": int(df[c].min()), "max": int(df[c].max()), "median": int(df[c].median())}
+                for c in numeric_cols
+            },
+        },
+        "feature_elimination": {
+            "columns": list(X_fe.columns),
+            "categorical": {c: [str(v) for v in le.classes_] for c, le in encoders_fe.items()},
+        },
+    }
+    with open(os.path.join(artifacts_dir, "feature_schema.json"), "w") as f:
+        json.dump(feature_schema, f, indent=2)
+
+    print(f"\nSaved backend artifacts to: {artifacts_dir}")
 
     # ---- PLOT ----
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))

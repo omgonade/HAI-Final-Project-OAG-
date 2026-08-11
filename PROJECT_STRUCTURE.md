@@ -6,15 +6,41 @@
 Final Project/
 ├── pipeline.py              # Main script — everything runs from here
 ├── download_data.py         # Downloads adult.data/adult.test/adult.names into data/raw/
-├── requirements.txt         # pandas, numpy, scikit-learn, fairlearn, matplotlib
+├── requirements.txt         # pandas, numpy, scikit-learn, fairlearn, matplotlib, joblib
 ├── Dockerfile
 ├── data/raw/                # adult.data, adult.test, adult.names (downloaded, not committed)
-└── output/                  # Generated: summary_results.csv, fairness_comparison.png
+├── output/                  # Generated: summary_results.csv, fairness_comparison.png
+├── backend/                 # Milestone 2: FastAPI prediction API
+│   ├── main.py              # Routes: /health, /metadata, /metrics, /feature-schema, /predict
+│   ├── model.py              # Loads artifacts/, encodes raw input, runs predictions
+│   ├── requirements.txt      # fastapi, uvicorn, pydantic, scikit-learn, joblib, numpy
+│   ├── README.md
+│   └── artifacts/             # Committed: models/scalers/encoders + metrics, written by pipeline.py
+│       ├── baseline_model.joblib / baseline_scaler.joblib / baseline_encoders.joblib
+│       ├── fe_model.joblib / fe_scaler.joblib / fe_encoders.joblib
+│       ├── metrics.json        # Performance + fairness for all four models
+│       └── feature_schema.json # Categorical options + numeric ranges, for the form
+└── frontend/                 # Milestone 2: Next.js web interface
+    ├── app/
+    │   ├── page.tsx           # Predict page
+    │   ├── about/page.tsx     # Model Card
+    │   └── fairness/page.tsx  # Fairness Dashboard
+    ├── components/
+    │   ├── Nav.tsx
+    │   ├── PredictForm.tsx    # Input form + prediction result (mitigated vs. baseline)
+    │   └── OptionSelect.tsx   # Custom dropdown with per-option descriptions
+    ├── lib/
+    │   ├── api.ts             # Typed fetch wrapper around the backend
+    │   └── fieldHelp.ts       # Field/option tooltip text
+    └── README.md
 ```
 
-There is no `src/` package. `pipeline.py` is intentionally a single, self-contained
-script — every function it needs is defined in that file, so there's nothing to wire
-up or keep in sync across modules.
+There is no `src/` package for the pipeline. `pipeline.py` is intentionally a single,
+self-contained script — every function it needs is defined in that file, so there's
+nothing to wire up or keep in sync across modules. `backend/` and `frontend/` are two
+separately deployable apps that consume what `pipeline.py` produces; see
+[README.md](README.md)'s "Milestone 2" section and each app's own `README.md` for how
+they fit together and deploy.
 
 ---
 
@@ -68,6 +94,15 @@ Builds a comparison table (`summary_results.csv`) across all four models
 (baseline + 3 mitigations) and a two-panel bar chart (`fairness_comparison.png`):
 left panel is Accuracy/F1, right panel is the two fairness gaps.
 
+**7. Backend artifact export**
+Immediately after the summary table, the script also writes `backend/artifacts/`:
+the baseline and feature-elimination models, their `StandardScaler`s, and the fitted
+`LabelEncoder`s for each categorical column (needed to encode new raw input the same
+way the training data was encoded), plus `metrics.json` (JSON version of the summary
+table, with by-sex subgroup breakdowns) and `feature_schema.json` (categorical options
+and numeric ranges, for building the frontend's input form). This is what lets
+`backend/` serve predictions without ever touching `data/raw/` itself.
+
 ---
 
 ## `download_data.py`
@@ -86,4 +121,4 @@ the same `data/raw/` files will reproduce the same numbers.
 
 ---
 
-**Last Updated**: August 2, 2026
+**Last Updated**: August 11, 2026

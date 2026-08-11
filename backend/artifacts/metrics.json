@@ -1,0 +1,114 @@
+{
+  "baseline": {
+    "label": "Baseline (Logistic Regression, no mitigation)",
+    "overall": {
+      "accuracy": 0.82483,
+      "precision": 0.711507,
+      "recall": 0.450719,
+      "f1": 0.551854
+    },
+    "by_group": {
+      "Female": {
+        "accuracy": 0.90387,
+        "precision": 0.714286,
+        "recall": 0.231788,
+        "f1": 0.35,
+        "selection_rate": 0.036234
+      },
+      "Male": {
+        "accuracy": 0.785504,
+        "precision": 0.711268,
+        "recall": 0.490887,
+        "f1": 0.580877,
+        "selection_rate": 0.208977
+      }
+    },
+    "dp_diff": 0.172744,
+    "dp_ratio": 0.173386,
+    "eo_diff": 0.259099
+  },
+  "feature_elimination": {
+    "label": "Mitigation A: Feature Elimination (drop sex/relationship/marital-status)",
+    "overall": {
+      "accuracy": 0.813365,
+      "precision": 0.693325,
+      "recall": 0.394593,
+      "f1": 0.502944
+    },
+    "by_group": {
+      "Female": {
+        "accuracy": 0.887602,
+        "precision": 0.495627,
+        "recall": 0.375276,
+        "f1": 0.427136,
+        "selection_rate": 0.084545
+      },
+      "Male": {
+        "accuracy": 0.776429,
+        "precision": 0.744697,
+        "recall": 0.398137,
+        "f1": 0.51887,
+        "selection_rate": 0.161884
+      }
+    },
+    "dp_diff": 0.077339,
+    "dp_ratio": 0.522259,
+    "eo_diff": 0.022861
+  },
+  "reweighting": {
+    "label": "Mitigation B: Reweighting",
+    "overall": {
+      "accuracy": 0.743428,
+      "precision": 0.475764,
+      "recall": 0.708761,
+      "f1": 0.569347
+    },
+    "by_group": {
+      "Female": {
+        "accuracy": 0.768548,
+        "precision": 0.292308,
+        "recall": 0.754967,
+        "f1": 0.421442,
+        "selection_rate": 0.28839
+      },
+      "Male": {
+        "accuracy": 0.73093,
+        "precision": 0.543198,
+        "recall": 0.700284,
+        "f1": 0.611819,
+        "selection_rate": 0.390361
+      }
+    },
+    "dp_diff": 0.10197,
+    "dp_ratio": 0.73878,
+    "eo_diff": 0.054683
+  },
+  "threshold_optimization": {
+    "label": "Mitigation C: Threshold Optimization (equalized odds)",
+    "overall": {
+      "accuracy": 0.804766,
+      "precision": 0.67112,
+      "recall": 0.361054,
+      "f1": 0.469515
+    },
+    "by_group": {
+      "Female": {
+        "accuracy": 0.877989,
+        "precision": 0.442623,
+        "recall": 0.357616,
+        "f1": 0.395604,
+        "selection_rate": 0.090214
+      },
+      "Male": {
+        "accuracy": 0.768335,
+        "precision": 0.740464,
+        "recall": 0.361685,
+        "f1": 0.485986,
+        "selection_rate": 0.147903
+      }
+    },
+    "dp_diff": 0.057688,
+    "dp_ratio": 0.609957,
+    "eo_diff": 0.004069
+  }
+}
