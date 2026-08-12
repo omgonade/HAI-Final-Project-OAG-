@@ -261,7 +261,7 @@ Then open `http://localhost:3000`.
 
 Two independent services, same repo:
 - Backend → Render (or Railway), Root Directory `backend/`.
-- Frontend → Vercel, Root Directory `frontend/`, with `NEXT_PUBLIC_API_URL` pointed at
+- Frontend → Render, Root Directory `frontend/`, with `NEXT_PUBLIC_API_URL` pointed at
   the deployed backend, and the backend's `ALLOWED_ORIGINS` pointed back at the
   deployed frontend.
 

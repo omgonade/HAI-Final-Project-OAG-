@@ -72,7 +72,7 @@ function buildDefaults(schema: FeatureSchema): PredictionInput {
 function validateInteger(text: string, min: number, max: number): string | null {
   const trimmed = text.trim();
   if (trimmed === "") return "Required.";
-  if (!/^\d+$/.test(trimmed)) return "Enter a whole number, digits only (e.g. 1000).";
+  if (!/^\d+$/.test(trimmed)) return `Enter a whole number, digits only (e.g. ${min.toLocaleString()}).`;
   const n = Number(trimmed);
   if (n < min || n > max) return `Must be between ${min.toLocaleString()} and ${max.toLocaleString()}.`;
   return null;
