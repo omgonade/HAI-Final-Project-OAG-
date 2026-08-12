@@ -94,15 +94,22 @@ export default function PredictForm({ schema }: { schema: FeatureSchema }) {
     return text;
   });
   const [numericErrors, setNumericErrors] = useState<Record<string, string | null>>({});
-  const [justPredicted, setJustPredicted] = useState(false);
+  const [flashKey, setFlashKey] = useState(0);
   const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!result) return;
-    resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setJustPredicted(true);
-    const timer = setTimeout(() => setJustPredicted(false), 1600);
-    return () => clearTimeout(timer);
+    const el = resultRef.current;
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const fullyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+      if (!fullyVisible) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+    // Bump the key so the flash div remounts and the CSS animation replays,
+    // even for back-to-back predictions where the class never toggled off.
+    setFlashKey((k) => k + 1);
   }, [result]);
 
   function updateField(col: string, value: string | number) {
@@ -277,14 +284,11 @@ export default function PredictForm({ schema }: { schema: FeatureSchema }) {
         {error && <p className="text-sm text-red-600">{error}</p>}
       </form>
 
-      <div
-        ref={resultRef}
-        className={`rounded-lg transition-shadow duration-700 ${
-          justPredicted ? "ring-2 ring-blue-500 ring-offset-2 ring-offset-background" : ""
-        }`}
-      >
+      <div ref={resultRef} className="self-start rounded-lg">
         {result ? (
-          <ResultCard result={result} />
+          <div key={flashKey} className="result-flash">
+            <ResultCard result={result} />
+          </div>
         ) : (
           <div className="text-sm text-black/60 dark:text-white/60 border border-dashed rounded-lg p-6 border-black/15 dark:border-white/20">
             Fill in the form and submit to see a prediction. This model estimates a
