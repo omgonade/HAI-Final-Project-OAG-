@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   type FeatureSchema,
   type PredictionInput,
@@ -94,6 +94,16 @@ export default function PredictForm({ schema }: { schema: FeatureSchema }) {
     return text;
   });
   const [numericErrors, setNumericErrors] = useState<Record<string, string | null>>({});
+  const [justPredicted, setJustPredicted] = useState(false);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!result) return;
+    resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setJustPredicted(true);
+    const timer = setTimeout(() => setJustPredicted(false), 1600);
+    return () => clearTimeout(timer);
+  }, [result]);
 
   function updateField(col: string, value: string | number) {
     setValues((prev) => ({ ...prev, [col]: value }));
@@ -267,7 +277,12 @@ export default function PredictForm({ schema }: { schema: FeatureSchema }) {
         {error && <p className="text-sm text-red-600">{error}</p>}
       </form>
 
-      <div>
+      <div
+        ref={resultRef}
+        className={`rounded-lg transition-shadow duration-700 ${
+          justPredicted ? "ring-2 ring-blue-500 ring-offset-2 ring-offset-background" : ""
+        }`}
+      >
         {result ? (
           <ResultCard result={result} />
         ) : (
