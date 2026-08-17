@@ -3,6 +3,7 @@ import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+import explain as explain_engine
 from model import FEATURE_SCHEMA, METRICS, PredictionInput, UnknownCategoryError, predict
 
 app = FastAPI(title="Adult Census Income Predictor API")
@@ -81,3 +82,34 @@ def predict_endpoint(input_data: PredictionInput):
             status_code=422,
             detail=f"Unknown value '{e.value}' for '{e.column}'. Allowed: {e.allowed}",
         )
+
+
+# --------------------------------------------------------------------------
+# Milestone 3: explainability. These serve the one-hot model variants trained
+# by ../train_explainable.py, which are separate artifacts from the ones above
+# so the original interface keeps reporting its original numbers.
+# --------------------------------------------------------------------------
+
+
+@app.post("/explain")
+def explain_endpoint(input_data: PredictionInput):
+    """Prediction plus why, what-would-change-it, and the sex-flip probe."""
+    return explain_engine.explain(input_data.to_raw_dict())
+
+
+@app.get("/explain-schema")
+def explain_schema():
+    """Form options for the /explain page, matching the one-hot models."""
+    return explain_engine.SCHEMA
+
+
+@app.get("/global-explanation")
+def global_explanation():
+    """How the model behaves overall, precomputed at training time."""
+    return explain_engine.GLOBAL
+
+
+@app.get("/explain-metrics")
+def explain_metrics():
+    """Accuracy and fairness for the one-hot variants served by /explain."""
+    return explain_engine.X_METRICS

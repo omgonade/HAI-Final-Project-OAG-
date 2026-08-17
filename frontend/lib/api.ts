@@ -7,6 +7,9 @@ export type FeatureSchema = {
     columns: string[];
     categorical: Record<string, string[]>;
     numeric: Record<string, NumericRange>;
+    /** Most common value per categorical field. Only the Milestone 3 schema
+     *  supplies this; Milestone 2's falls back to the first option. */
+    defaults?: Record<string, string>;
   };
   feature_elimination: {
     columns: string[];

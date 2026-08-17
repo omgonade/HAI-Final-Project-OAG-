@@ -1,0 +1,528 @@
+{
+  "feature_elimination": {
+    "features": [
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "importance": 0.931153,
+        "rank": 1
+      },
+      {
+        "feature": "capital-gain",
+        "label": "Capital gain",
+        "importance": 0.639854,
+        "rank": 2
+      },
+      {
+        "feature": "age",
+        "label": "Age",
+        "importance": 0.456934,
+        "rank": 3
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "importance": 0.449295,
+        "rank": 4
+      },
+      {
+        "feature": "hours-per-week",
+        "label": "Hours per week",
+        "importance": 0.2622,
+        "rank": 5
+      },
+      {
+        "feature": "education-num",
+        "label": "Years of education",
+        "importance": 0.235184,
+        "rank": 6
+      },
+      {
+        "feature": "workclass",
+        "label": "Work class",
+        "importance": 0.15083,
+        "rank": 7
+      },
+      {
+        "feature": "race",
+        "label": "Race",
+        "importance": 0.132961,
+        "rank": 8
+      },
+      {
+        "feature": "native-country",
+        "label": "Native country",
+        "importance": 0.114882,
+        "rank": 9
+      },
+      {
+        "feature": "capital-loss",
+        "label": "Capital loss",
+        "importance": 0.112377,
+        "rank": 10
+      }
+    ],
+    "top_category_effects": [
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Other-service",
+        "effect": -0.365476
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Exec-managerial",
+        "effect": 0.244679
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Priv-house-serv",
+        "effect": -0.190875
+      },
+      {
+        "feature": "native-country",
+        "label": "Native country",
+        "value": "Outlying-US(Guam-USVI-etc)",
+        "effect": -0.154078
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "11th",
+        "effect": -0.148448
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Farming-fishing",
+        "effect": -0.145513
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Prof-school",
+        "effect": 0.141634
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Adm-clerical",
+        "effect": -0.139032
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Bachelors",
+        "effect": 0.134075
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Handlers-cleaners",
+        "effect": -0.133059
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Prof-specialty",
+        "effect": 0.1282
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Craft-repair",
+        "effect": 0.126678
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "10th",
+        "effect": -0.112842
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "9th",
+        "effect": -0.10598
+      },
+      {
+        "feature": "workclass",
+        "label": "Work class",
+        "value": "Federal-gov",
+        "effect": 0.104636
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Protective-serv",
+        "effect": 0.102643
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Masters",
+        "effect": 0.10252
+      },
+      {
+        "feature": "race",
+        "label": "Race",
+        "value": "Black",
+        "effect": -0.096506
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "7th-8th",
+        "effect": -0.095389
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Doctorate",
+        "effect": 0.095136
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Sales",
+        "effect": 0.082381
+      },
+      {
+        "feature": "workclass",
+        "label": "Work class",
+        "value": "Self-emp-not-inc",
+        "effect": -0.079647
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Preschool",
+        "effect": -0.076397
+      },
+      {
+        "feature": "workclass",
+        "label": "Work class",
+        "value": "Self-emp-inc",
+        "effect": 0.075462
+      },
+      {
+        "feature": "race",
+        "label": "Race",
+        "value": "White",
+        "effect": 0.074389
+      }
+    ],
+    "numeric_effects": [
+      {
+        "feature": "capital-gain",
+        "label": "Capital gain",
+        "effect": 2.428139
+      },
+      {
+        "feature": "age",
+        "label": "Age",
+        "effect": 0.555724
+      },
+      {
+        "feature": "hours-per-week",
+        "label": "Hours per week",
+        "effect": 0.420605
+      },
+      {
+        "feature": "education-num",
+        "label": "Years of education",
+        "effect": 0.320475
+      },
+      {
+        "feature": "capital-loss",
+        "label": "Capital loss",
+        "effect": 0.275407
+      }
+    ],
+    "intercept": -1.422483
+  },
+  "baseline": {
+    "features": [
+      {
+        "feature": "marital-status",
+        "label": "Marital status",
+        "importance": 1.465586,
+        "rank": 1
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "importance": 0.784208,
+        "rank": 2
+      },
+      {
+        "feature": "capital-gain",
+        "label": "Capital gain",
+        "importance": 0.653489,
+        "rank": 3
+      },
+      {
+        "feature": "relationship",
+        "label": "Relationship",
+        "importance": 0.518317,
+        "rank": 4
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "importance": 0.483503,
+        "rank": 5
+      },
+      {
+        "feature": "sex",
+        "label": "Sex",
+        "importance": 0.343938,
+        "rank": 6
+      },
+      {
+        "feature": "age",
+        "label": "Age",
+        "importance": 0.270968,
+        "rank": 7
+      },
+      {
+        "feature": "education-num",
+        "label": "Years of education",
+        "importance": 0.250831,
+        "rank": 8
+      },
+      {
+        "feature": "hours-per-week",
+        "label": "Hours per week",
+        "importance": 0.210853,
+        "rank": 9
+      },
+      {
+        "feature": "workclass",
+        "label": "Work class",
+        "importance": 0.183184,
+        "rank": 10
+      },
+      {
+        "feature": "native-country",
+        "label": "Native country",
+        "importance": 0.142416,
+        "rank": 11
+      },
+      {
+        "feature": "capital-loss",
+        "label": "Capital loss",
+        "importance": 0.112153,
+        "rank": 12
+      },
+      {
+        "feature": "race",
+        "label": "Race",
+        "importance": 0.064154,
+        "rank": 13
+      }
+    ],
+    "top_category_effects": [
+      {
+        "feature": "marital-status",
+        "label": "Marital status",
+        "value": "Married-civ-spouse",
+        "effect": 0.73179
+      },
+      {
+        "feature": "marital-status",
+        "label": "Marital status",
+        "value": "Never-married",
+        "effect": -0.52275
+      },
+      {
+        "feature": "relationship",
+        "label": "Relationship",
+        "value": "Own-child",
+        "effect": -0.28871
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Other-service",
+        "effect": -0.283376
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Exec-managerial",
+        "effect": 0.252817
+      },
+      {
+        "feature": "relationship",
+        "label": "Relationship",
+        "value": "Wife",
+        "effect": 0.233466
+      },
+      {
+        "feature": "marital-status",
+        "label": "Marital status",
+        "value": "Divorced",
+        "effect": -0.232906
+      },
+      {
+        "feature": "sex",
+        "label": "Sex",
+        "value": "Female",
+        "effect": -0.183248
+      },
+      {
+        "feature": "sex",
+        "label": "Sex",
+        "value": "Male",
+        "effect": 0.183248
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Farming-fishing",
+        "effect": -0.172895
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Prof-specialty",
+        "effect": 0.169333
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Handlers-cleaners",
+        "effect": -0.164885
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Prof-school",
+        "effect": 0.149081
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "11th",
+        "effect": -0.141302
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Bachelors",
+        "effect": 0.139809
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Masters",
+        "effect": 0.136572
+      },
+      {
+        "feature": "native-country",
+        "label": "Native country",
+        "value": "Outlying-US(Guam-USVI-etc)",
+        "effect": -0.136016
+      },
+      {
+        "feature": "relationship",
+        "label": "Relationship",
+        "value": "Not-in-family",
+        "effect": 0.134236
+      },
+      {
+        "feature": "workclass",
+        "label": "Work class",
+        "value": "Self-emp-not-inc",
+        "effect": -0.123552
+      },
+      {
+        "feature": "marital-status",
+        "label": "Marital status",
+        "value": "Separated",
+        "effect": -0.121041
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "9th",
+        "effect": -0.116966
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "7th-8th",
+        "effect": -0.108415
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "Doctorate",
+        "effect": 0.10442
+      },
+      {
+        "feature": "education",
+        "label": "Education",
+        "value": "10th",
+        "effect": -0.10393
+      },
+      {
+        "feature": "occupation",
+        "label": "Occupation",
+        "value": "Priv-house-serv",
+        "effect": -0.103822
+      }
+    ],
+    "numeric_effects": [
+      {
+        "feature": "capital-gain",
+        "label": "Capital gain",
+        "effect": 2.479883
+      },
+      {
+        "feature": "education-num",
+        "label": "Years of education",
+        "effect": 0.341796
+      },
+      {
+        "feature": "hours-per-week",
+        "label": "Hours per week",
+        "effect": 0.338237
+      },
+      {
+        "feature": "age",
+        "label": "Age",
+        "effect": 0.329551
+      },
+      {
+        "feature": "capital-loss",
+        "label": "Capital loss",
+        "effect": 0.274856
+      }
+    ],
+    "intercept": -1.959821
+  },
+  "dropped_by_mitigation": [
+    "sex",
+    "relationship",
+    "marital-status"
+  ],
+  "human_labels": {
+    "age": "Age",
+    "workclass": "Work class",
+    "education": "Education",
+    "education-num": "Years of education",
+    "marital-status": "Marital status",
+    "occupation": "Occupation",
+    "relationship": "Relationship",
+    "race": "Race",
+    "sex": "Sex",
+    "capital-gain": "Capital gain",
+    "capital-loss": "Capital loss",
+    "hours-per-week": "Hours per week",
+    "native-country": "Native country"
+  }
+}
