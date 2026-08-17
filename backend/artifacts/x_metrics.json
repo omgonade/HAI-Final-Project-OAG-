@@ -1,0 +1,58 @@
+{
+  "baseline": {
+    "label": "baseline",
+    "overall": {
+      "accuracy": 0.842915,
+      "precision": 0.728,
+      "recall": 0.584582,
+      "f1": 0.648456
+    },
+    "by_group": {
+      "Female": {
+        "accuracy": 0.915676,
+        "precision": 0.727941,
+        "recall": 0.454128,
+        "f1": 0.559322,
+        "selection_rate": 0.073514
+      },
+      "Male": {
+        "accuracy": 0.80752,
+        "precision": 0.728008,
+        "recall": 0.608622,
+        "f1": 0.662983,
+        "selection_rate": 0.260058
+      }
+    },
+    "dp_diff": 0.186544,
+    "dp_ratio": 0.282681,
+    "eo_diff": 0.154494
+  },
+  "feature_elimination": {
+    "label": "feature_elimination",
+    "overall": {
+      "accuracy": 0.816027,
+      "precision": 0.716168,
+      "recall": 0.426838,
+      "f1": 0.534884
+    },
+    "by_group": {
+      "Female": {
+        "accuracy": 0.891351,
+        "precision": 0.558219,
+        "recall": 0.373853,
+        "f1": 0.447802,
+        "selection_rate": 0.078919
+      },
+      "Male": {
+        "accuracy": 0.779385,
+        "precision": 0.749637,
+        "recall": 0.436602,
+        "f1": 0.551816,
+        "selection_rate": 0.181173
+      }
+    },
+    "dp_diff": 0.102254,
+    "dp_ratio": 0.4356,
+    "eo_diff": 0.062749
+  }
+}
