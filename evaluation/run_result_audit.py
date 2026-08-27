@@ -23,11 +23,11 @@ from playwright.sync_api import sync_playwright
 BASE = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000")
 THEME = os.environ.get("EVAL_THEME", "dark")
 HERE = os.path.dirname(os.path.abspath(__file__))
-# See run_inspection.py: generated evidence lives with the report, which is
-# gitignored, so that this script stays readable in the repository.
+# See run_inspection.py: generated evidence lives beside these scripts, in
+# evaluation/Milestone4_Evaluation/, and the directories are created on demand.
 OUTPUT = os.environ.get(
     "EVAL_OUTPUT_DIR",
-    os.path.join(HERE, os.pardir, "Reports", "Milestone4_Evaluation"),
+    os.path.join(HERE, "Milestone4_Evaluation"),
 )
 SHOTS = os.path.join(OUTPUT, "screenshots")
 LOGS = os.path.join(OUTPUT, "logs")

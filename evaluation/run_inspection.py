@@ -27,12 +27,12 @@ BASE = os.environ.get("ALLOWED_ORIGINS", "http://localhost:3000")
 # defaults to light, which is NOT what most users see -- capture dark.
 THEME = os.environ.get("EVAL_THEME", "dark")
 HERE = os.path.dirname(os.path.abspath(__file__))
-# Generated evidence is written next to the report, not next to this script:
-# Reports/* is gitignored, so screenshots and logs stay out of the repository
-# while the code that produces them stays readable in it.
+# Generated evidence is written next to the script that produces it, so a
+# fresh clone gets the whole evaluation -- code and evidence -- in one folder.
+# The directories below are created on demand, so nothing has to exist first.
 OUTPUT = os.environ.get(
     "EVAL_OUTPUT_DIR",
-    os.path.join(HERE, os.pardir, "Reports", "Milestone4_Evaluation"),
+    os.path.join(HERE, "Milestone4_Evaluation"),
 )
 SHOTS = os.path.join(OUTPUT, "screenshots")
 LOGS = os.path.join(OUTPUT, "logs")

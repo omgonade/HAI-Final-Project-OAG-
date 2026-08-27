@@ -20,11 +20,11 @@ import urllib.request
 
 API = os.environ.get("NEXT_PUBLIC_API_URL", "http://127.0.0.1:8000")
 HERE = os.path.dirname(os.path.abspath(__file__))
-# See run_inspection.py: generated evidence lives with the report, which is
-# gitignored, so that this script stays readable in the repository.
+# See run_inspection.py: generated evidence lives beside these scripts, in
+# evaluation/Milestone4_Evaluation/, and the directories are created on demand.
 OUTPUT = os.environ.get(
     "EVAL_OUTPUT_DIR",
-    os.path.join(HERE, os.pardir, "Reports", "Milestone4_Evaluation"),
+    os.path.join(HERE, "Milestone4_Evaluation"),
 )
 LOGS = os.path.join(OUTPUT, "logs")
 os.makedirs(LOGS, exist_ok=True)
